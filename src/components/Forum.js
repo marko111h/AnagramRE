@@ -11,27 +11,34 @@ const Forum = (props) => {
     if (prvaRec.trim().length === 0 || drugaRec.trim() === 0) {
       return
     }
-
+    
     const proveravamo = (a, b) => {
       const p = a.toLowerCase().split('').sort().join('')
       const d = b.toLowerCase().split('').sort().join('')
       let x = p.length
       let y = d.length
+      
       if (x === y) {
         for (let i = 0; i < x; i++) {
-          if (a[i] !== b[i]) {
-            return true
+          if (p[i] !== d[i]) {
+            return false
           }
-        }
-      } else {
-        return false
       }
+      
+    }else{
+      return false
     }
+  }
     const e = proveravamo(prvaRec, drugaRec)
-    if (e === true) {
-      props.onAddAnagram(prvaRec, drugaRec)
-    } else {
+    if (e === false) {
+      
       alert('Nije Anagram')
+
+     
+    } else {
+      alert("Zadata rec je Anagram")
+       props.onAddAnagram(prvaRec, drugaRec)
+
     }
 
     setPrvaRec('')
